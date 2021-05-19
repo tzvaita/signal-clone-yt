@@ -11,7 +11,7 @@ const LoginScreen = ({ navigation }) => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       console.log(authUser)
-      if(authUser) {
+      if (authUser) {
         navigation.replace('Home');
       }
     });
@@ -20,7 +20,9 @@ const LoginScreen = ({ navigation }) => {
   }, []);
 
   const signIn = () => {
-
+    auth
+    .signInWithEmailAndPassword(email, password)
+    .catch((error) => alert(error));
   }
   
   return (
@@ -46,6 +48,7 @@ const LoginScreen = ({ navigation }) => {
         type='password'
         value={password}
         onChangeText={(text) => setPassword(text)}
+        onSubmitEditing={signIn}
         />
       </View>
 
